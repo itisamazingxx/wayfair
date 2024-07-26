@@ -86,5 +86,4 @@ public class FurnitureServiceImpl implements FurnitureService {
         return objPage;
     }
 
-
 }

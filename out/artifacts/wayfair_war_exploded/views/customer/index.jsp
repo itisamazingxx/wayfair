@@ -6,13 +6,27 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>韩顺平教育-家居网购~</title>
+    <title>Wayfair</title>
     <base href="<%=request.getContextPath()+"/"%>">
     <!-- 移动端适配 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css"/>
     <link rel="stylesheet" href="assets/css/plugins/plugins.min.css"/>
     <link rel="stylesheet" href="assets/css/style.min.css">
+
+    <!-- 引入jquery -->
+    <script type="text/javascript" src="script/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            // 给add to cart按钮添加点击事件
+            $("button.add-to-cart").click(function () {
+                // 获取到对应家具商品的id
+                var furnitureId = $(this).attr("furnitureId");
+                // 发送一个请求添加家具
+                location.href = "cartServlet?action=addItem&id=" +furnitureId;
+            })
+        })
+    </script>
 </head>
 
 <body>
@@ -35,11 +49,13 @@
                 <div class="col align-self-center">
                     <div class="header-actions">
                         <div class="header_account_list">
+                            <!-- 首页搜索位置 -->
                             <a href="javascript:void(0)" class="header-action-btn search-btn"><i
                                     class="icon-magnifier"></i></a>
                             <div class="dropdown_search">
-                                <form class="action-form" action="#">
-                                    <input class="form-control" placeholder="Enter your search key" type="text">
+                                <form class="action-form" action="customerFurnitureServlet">
+                                    <input type="hidden" name="action" value="pageByName">
+                                    <input class="form-control" name="name" placeholder="Enter your search key" type="text">
                                     <button class="submit" type="submit"><i class="icon-magnifier"></i></button>
                                 </form>
                             </div>
@@ -75,7 +91,7 @@
                 <!-- Header Logo Start -->
                 <div class="col-auto align-self-center">
                     <div class="header-logo">
-                        <a href="index.jsp"><img width="280px" src="../../assets/images/logo/logo.png" alt="Site Logo" /></a>
+                        <a href="index.jsp"><img width="280px" src="assets/images/logo/logo.png" alt="Site Logo" /></a>
                     </div>
                 </div>
                 <!-- Header Logo End -->
@@ -119,9 +135,10 @@
                                             <div class="actions">
                                                 <a href="#" class="action wishlist" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="icon-size-fullscreen"></i></a>
                                             </div>
-                                            <button title="Add To Cart" class=" add-to-cart">Add To Cart</button>
                                         </div>
                                         <div class="content">
+                                            <!-- 添加购物车按钮 -->
+                                            <button title="Add To Cart" furnitureId="${furniture.id}" class=" add-to-cart">Add To Cart</button>
                                             <h5 class="title">
                                                 <a href="shop-left-sidebar.html">${furniture.name}</a>
                                             </h5>
@@ -157,7 +174,7 @@
     <ul>
         <!-- 如果当前页 > 1, 才显示上一页内容 -->
         <c:if test="${requestScope.page.pageNo > 1}">
-            <li><a href="customerFurnitureServlet?action=page&pageNo=${requestScope.page.pageNo - 1}">上一页</a></li>
+            <li><a href="${requestScope.page.url}&pageNo=${requestScope.page.pageNo - 1}">上一页</a></li>
         </c:if>
 
         <c:set var="begin" value="1"/>
@@ -166,17 +183,17 @@
         <c:forEach begin="${begin}" end="${end}" var="i">
             <!-- 如果当前页 使用class="active"修饰 -->
             <c:if test="${i == requestScope.page.pageNo}">
-                <li><a class="active" href="customerFurnitureServlet?action=page&pageNo=${i}">${i}</a></li>
+                <li><a class="active" href="${requestScope.page.url}&pageNo=${i}">${i}</a></li>
             </c:if>
 
             <c:if test="${i != requestScope.page.pageNo}">
-                <li><a href="customerFurnitureServlet?action=page&pageNo=${i}">${i}</a></li>
+                <li><a href="${requestScope.page.url}page&pageNo=${i}">${i}</a></li>
             </c:if>
 
         </c:forEach>
 
         <c:if test="${requestScope.page.pageNo < requestScope.page.totalPage}">
-            <li><a href="customerFurnitureServlet?action=page&pageNo=${requestScope.page.pageNo + 1}">下一页</a></li>
+            <li><a href="${requestScope.page.url}&pageNo=${requestScope.page.pageNo + 1}">下一页</a></li>
         </c:if>
 
         <li><a>总页数${requestScope.page.totalPage}页</a></li>

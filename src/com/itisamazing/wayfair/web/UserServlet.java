@@ -29,7 +29,7 @@ public class UserServlet extends BasicServlet {
         // 查询当前用户输入对象是否存在于数据库
         if (userService.isUserExist(username, password)) {
             // 将请求转发给对应页面
-            request.getRequestDispatcher("/views/member/login_ok.html")
+            request.getRequestDispatcher("/views/member/login_ok.jsp")
                     .forward(request, response);
         } else {
             // 把登录错误信息放到request域

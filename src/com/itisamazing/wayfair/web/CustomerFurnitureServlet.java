@@ -16,7 +16,7 @@ public class CustomerFurnitureServlet extends BasicServlet {
     private FurnitureService furnitureService = new FurnitureServiceImpl();
 
     /**
-     * 仍然是分页请求家具的api
+     * 仍然是分页请求家具的api, 网站主页(未登录)的商品展示
      */
     protected void page(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // 获取到要显示页面的页数
@@ -41,7 +41,21 @@ public class CustomerFurnitureServlet extends BasicServlet {
         int pageSize = DataUtils.parseInt(request.getParameter("pageSize"), Page.PAGE_SIZE);
         // 获取要搜索的家具名
         String name = request.getParameter("name");
+
+        // 如果有参数name但没有赋值, name = ""
+        // 如果没有name这个参数, 接收到的是null
+        // 需要把null跟空串的业务逻辑合并
+        if (null == name) {
+            name = "";
+        }
+
         Page<Furniture> page = furnitureService.pageByName(pageNo, pageSize, name);
+
+        StringBuilder url = new StringBuilder("customerFurnitureServlet?action=pageByName");
+        if (!"".equals(name)) {
+            url.append("&name=" + name);
+        }
+        page.setUrl(url.toString());
         request.setAttribute("page", page);
         // 重定向 导航到新页面
         request.getRequestDispatcher("/views/customer/index.jsp")

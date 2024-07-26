@@ -64,7 +64,7 @@ public class FurnitureDAOImplTest {
 
     @Test
     public void getPageItemsByNameTest() {
-        List<Furniture> furnitureList = furnitureDAO.getPageItemsByName(0, 2, "e");
+        List<Furniture> furnitureList = furnitureDAO.getPageItemsByName(0, 3, "e");
         System.out.println(furnitureList);
     }
 }

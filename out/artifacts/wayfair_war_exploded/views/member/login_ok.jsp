@@ -1,9 +1,12 @@
+<!-- JSP文件头 -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <title>韩顺平教育-家居网购</title>
+    <title>Wayfair</title>
+    <base href="<%=request.getContextPath()+"/"%>">
     <base href="http://localhost:10000/jiaju_mall/">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     <link rel="stylesheet" href="assets/css/vendor/vendor.min.css"/>
@@ -34,6 +37,7 @@
     <div class="header-bottom d-lg-none sticky-nav bg-white">
         <div class="container position-relative">
             <div class="row align-self-center">
+
                 <!-- Header Logo Start -->
                 <div class="col-auto align-self-center">
                     <div class="header-logo">
@@ -42,6 +46,22 @@
                     </div>
                 </div>
                 <!-- Header Logo End -->
+
+                <div class="col align-self-center">
+                    <div class="header-actions">
+                        <div class="header-bottom-set dropdown">
+                            <a>Welcome:</a>
+                        </div>
+
+                        <div class="header-bottom-set dropdown">
+                            <a href="#">Orders</a>
+                        </div>
+                        <div class="header-bottom-set dropdown">
+                            <a href="#">Log-out</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

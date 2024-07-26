@@ -61,4 +61,15 @@
         <url-pattern>/kaptchaServlet</url-pattern>
     </servlet-mapping>
 
+    <!-- 管理购物车的Servlet -->
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.itisamazing.wayfair.web.CartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cartServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>

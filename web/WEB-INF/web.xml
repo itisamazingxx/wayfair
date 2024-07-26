@@ -4,6 +4,16 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+    <!-- 配置过滤器 -->
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>com.itisamazing.wayfair.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <!-- 配置要进行验证的url -->
+        <url-pattern></url-pattern>
+    </filter-mapping>
     <!-- 配置Servlet 响应http请求 -->
 
     <!-- 管理用户服务的Servlet -->
@@ -59,6 +69,17 @@
     <servlet-mapping>
         <servlet-name>KaptchaServlet</servlet-name>
         <url-pattern>/kaptchaServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 管理购物车的Servlet -->
+    <servlet>
+        <servlet-name>CartServlet</servlet-name>
+        <servlet-class>com.itisamazing.wayfair.web.CartServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CartServlet</servlet-name>
+        <url-pattern>/cartServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

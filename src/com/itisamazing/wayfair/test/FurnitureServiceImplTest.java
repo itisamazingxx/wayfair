@@ -60,9 +60,8 @@ public class FurnitureServiceImplTest {
 
     @Test
     public void pageByNameTest() {
-        Page page = furnitureService.pageByName(1, 2, "e");
-        System.out.println(page);
+        Page page = furnitureService.pageByName(1, 3, "e");
+        System.out.println(page.getItems());
     }
-
 
 }
